@@ -1,0 +1,2205 @@
+[[task-1]]
+= Task 1
+
+[[importing-packages]]
+=== Importing Packages
+
+
++*In[1]:*+
+[source, ipython3]
+----
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+----
+
+[[task-1.1]]
+== Task 1.1
+
+[[loading-data]]
+=== Loading Data
+
+
++*In[108]:*+
+[source, ipython3]
+----
+star_wars = pd.read_csv("StarWars.csv", encoding = "unicode_escape")# Loading the data using pandas function.
+print(star_wars.shape)# gives the dimentions of the data frame.
+star_wars# Displays the data in the data frame.
+----
+
+
++*Out[108]:*+
+----
+(1187, 38)
+
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |Which of the following Star Wars films have you seen? Please
+select all that apply. |Unnamed: 4 |Unnamed: 5 |Unnamed: 6 |Unnamed: 7
+|Unnamed: 8 |Please rank the Star Wars films in order of preference with
+1 being your favorite film in the franchise and 6 being your least
+favorite film. |... |Unnamed: 28 |Which character shot first? |Are you
+familiar with the Expanded Universe? |Do you consider yourself to be a
+fan of the Expanded Universe?Œæ |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|0 |NaN |Response |Response |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |Star Wars: Episode I The Phantom Menace |... |Yoda |Response
+|Response |Response |Response |Response |Response |Response |Response
+|Response
+
+|1 |3.292880e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |3 |... |Very favorably |I don't understand this question |Yes |No
+|No |Male |18-29 |NaN |High school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |... |NaN
+|NaN |NaN |NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West
+South Central
+
+|3 |3.292765e+09 |Yes |No |Star Wars: Episode I The Phantom Menace |Star
+Wars: Episode II Attack of the Clones |Star Wars: Episode III Revenge of
+the Sith |NaN |NaN |NaN |1 |... |Unfamiliar (N/A) |I don't understand
+this question |No |NaN |No |Male |18-29 |$0 - $24,999 |High school
+degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Male |18-29 |$100,000 - $149,999 |Some college or Associate degree
+|West North Central
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |Han |No |NaN |Yes |Female |18-29 |$0 -
+$24,999 |Some college or Associate degree |East North Central
+
+|1183 |3.288379e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Female |30-44 |$50,000 - $99,999 |Bachelor degree |Mountain
+
+|1184 |3.288375e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |...
+|NaN |NaN |NaN |NaN |No |Female |30-44 |$50,000 - $99,999 |Bachelor
+degree |Middle Atlantic
+
+|1185 |3.288373e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |Han |No |NaN |Yes |Female |45-60 |$100,000
+- $149,999 |Some college or Associate degree |East North Central
+
+|1186 |3.288373e+09 |Yes |No |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |NaN |NaN |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |6 |... |Very unfavorably |I don't understand this question |No
+|NaN |No |Female |> 60 |$50,000 - $99,999 |Graduate degree |Pacific
+|=======================================================================
+
+1187 rows × 38 columns
+----
+
+[[task-1.2]]
+== Task 1.2
+
+*Checking data types.*
+
+
++*In[109]:*+
+[source, ipython3]
+----
+star_wars.dtypes# Gives the type of each column.
+----
+
+
++*Out[109]:*+
+----RespondentID                                                                                                                                     float64
+Have you seen any of the 6 films in the Star Wars franchise?                                                                                      object
+Do you consider yourself to be a fan of the Star Wars film franchise?                                                                             object
+Which of the following Star Wars films have you seen? Please select all that apply.                                                               object
+Unnamed: 4                                                                                                                                        object
+Unnamed: 5                                                                                                                                        object
+Unnamed: 6                                                                                                                                        object
+Unnamed: 7                                                                                                                                        object
+Unnamed: 8                                                                                                                                        object
+Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.     object
+Unnamed: 10                                                                                                                                       object
+Unnamed: 11                                                                                                                                       object
+Unnamed: 12                                                                                                                                       object
+Unnamed: 13                                                                                                                                       object
+Unnamed: 14                                                                                                                                       object
+Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.                                    object
+Unnamed: 16                                                                                                                                       object
+Unnamed: 17                                                                                                                                       object
+Unnamed: 18                                                                                                                                       object
+Unnamed: 19                                                                                                                                       object
+Unnamed: 20                                                                                                                                       object
+Unnamed: 21                                                                                                                                       object
+Unnamed: 22                                                                                                                                       object
+Unnamed: 23                                                                                                                                       object
+Unnamed: 24                                                                                                                                       object
+Unnamed: 25                                                                                                                                       object
+Unnamed: 26                                                                                                                                       object
+Unnamed: 27                                                                                                                                       object
+Unnamed: 28                                                                                                                                       object
+Which character shot first?                                                                                                                       object
+Are you familiar with the Expanded Universe?                                                                                                      object
+Do you consider yourself to be a fan of the Expanded Universe?æ                                                                                  object
+Do you consider yourself to be a fan of the Star Trek franchise?                                                                                  object
+Gender                                                                                                                                            object
+Age                                                                                                                                               object
+Household Income                                                                                                                                  object
+Education                                                                                                                                         object
+Location (Census Region)                                                                                                                          object
+dtype: object----
+
+Data types are to be changed and I am going to change them in the
+further tasks leaving this task here.
+
+[[inspecting-on-data-for-cleaning]]
+=== Inspecting on data for cleaning
+
+Here I will check for *Typos - Missing values*. ## [Tasks -> 1.3, 1.7]
+
+
++*In[110]:*+
+[source, ipython3]
+----
+star_wars
+----
+
+
++*Out[110]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |Which of the following Star Wars films have you seen? Please
+select all that apply. |Unnamed: 4 |Unnamed: 5 |Unnamed: 6 |Unnamed: 7
+|Unnamed: 8 |Please rank the Star Wars films in order of preference with
+1 being your favorite film in the franchise and 6 being your least
+favorite film. |... |Unnamed: 28 |Which character shot first? |Are you
+familiar with the Expanded Universe? |Do you consider yourself to be a
+fan of the Expanded Universe?Œæ |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|0 |NaN |Response |Response |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |Star Wars: Episode I The Phantom Menace |... |Yoda |Response
+|Response |Response |Response |Response |Response |Response |Response
+|Response
+
+|1 |3.292880e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |3 |... |Very favorably |I don't understand this question |Yes |No
+|No |Male |18-29 |NaN |High school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |... |NaN
+|NaN |NaN |NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West
+South Central
+
+|3 |3.292765e+09 |Yes |No |Star Wars: Episode I The Phantom Menace |Star
+Wars: Episode II Attack of the Clones |Star Wars: Episode III Revenge of
+the Sith |NaN |NaN |NaN |1 |... |Unfamiliar (N/A) |I don't understand
+this question |No |NaN |No |Male |18-29 |$0 - $24,999 |High school
+degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Male |18-29 |$100,000 - $149,999 |Some college or Associate degree
+|West North Central
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |Han |No |NaN |Yes |Female |18-29 |$0 -
+$24,999 |Some college or Associate degree |East North Central
+
+|1183 |3.288379e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Female |30-44 |$50,000 - $99,999 |Bachelor degree |Mountain
+
+|1184 |3.288375e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |...
+|NaN |NaN |NaN |NaN |No |Female |30-44 |$50,000 - $99,999 |Bachelor
+degree |Middle Atlantic
+
+|1185 |3.288373e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |Han |No |NaN |Yes |Female |45-60 |$100,000
+- $149,999 |Some college or Associate degree |East North Central
+
+|1186 |3.288373e+09 |Yes |No |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |NaN |NaN |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |6 |... |Very unfavorably |I don't understand this question |No
+|NaN |No |Female |> 60 |$50,000 - $99,999 |Graduate degree |Pacific
+|=======================================================================
+
+1187 rows × 38 columns
+----
+
+Remove the values that are missing or invalid in RespondentId.
+
+
++*In[111]:*+
+[source, ipython3]
+----
+star_wars = star_wars[pd.notnull(star_wars["RespondentID"])]# Removes the row with invalid respondent.
+star_wars
+----
+
+
++*Out[111]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |Which of the following Star Wars films have you seen? Please
+select all that apply. |Unnamed: 4 |Unnamed: 5 |Unnamed: 6 |Unnamed: 7
+|Unnamed: 8 |Please rank the Star Wars films in order of preference with
+1 being your favorite film in the franchise and 6 being your least
+favorite film. |... |Unnamed: 28 |Which character shot first? |Are you
+familiar with the Expanded Universe? |Do you consider yourself to be a
+fan of the Expanded Universe?Œæ |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|1 |3.292880e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |3 |... |Very favorably |I don't understand this question |Yes |No
+|No |Male |18-29 |NaN |High school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |... |NaN
+|NaN |NaN |NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West
+South Central
+
+|3 |3.292765e+09 |Yes |No |Star Wars: Episode I The Phantom Menace |Star
+Wars: Episode II Attack of the Clones |Star Wars: Episode III Revenge of
+the Sith |NaN |NaN |NaN |1 |... |Unfamiliar (N/A) |I don't understand
+this question |No |NaN |No |Male |18-29 |$0 - $24,999 |High school
+degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Male |18-29 |$100,000 - $149,999 |Some college or Associate degree
+|West North Central
+
+|5 |3.292731e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Somewhat favorably |Greedo |Yes |No |No |Male |18-29
+|$100,000 - $149,999 |Some college or Associate degree |West North
+Central
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |5 |... |Very favorably |Han |No |NaN |Yes |Female |18-29 |$0 -
+$24,999 |Some college or Associate degree |East North Central
+
+|1183 |3.288379e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |I don't understand this question |No |NaN
+|Yes |Female |30-44 |$50,000 - $99,999 |Bachelor degree |Mountain
+
+|1184 |3.288375e+09 |No |NaN |NaN |NaN |NaN |NaN |NaN |NaN |NaN |...
+|NaN |NaN |NaN |NaN |No |Female |30-44 |$50,000 - $99,999 |Bachelor
+degree |Middle Atlantic
+
+|1185 |3.288373e+09 |Yes |Yes |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |Star Wars: Episode III
+Revenge of the Sith |Star Wars: Episode IV A New Hope |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |4 |... |Very favorably |Han |No |NaN |Yes |Female |45-60 |$100,000
+- $149,999 |Some college or Associate degree |East North Central
+
+|1186 |3.288373e+09 |Yes |No |Star Wars: Episode I The Phantom Menace
+|Star Wars: Episode II Attack of the Clones |NaN |NaN |Star Wars:
+Episode V The Empire Strikes Back |Star Wars: Episode VI Return of the
+Jedi |6 |... |Very unfavorably |I don't understand this question |No
+|NaN |No |Female |> 60 |$50,000 - $99,999 |Graduate degree |Pacific
+|=======================================================================
+
+1186 rows × 38 columns
+----
+
+Now changing column names which hold the Star War movies that the
+respondents have seen among the entire series as they are not properly
+named.
+
+
++*In[112]:*+
+[source, ipython3]
+----
+star_wars = star_wars.rename(columns = {
+        "Which of the following Star Wars films have you seen? Please select all that apply." : 'The Phantom Menance',
+        "Unnamed: 4" : 'Attack of the Clones', 
+        "Unnamed: 5" : 'Revenge of the Sith',     
+        "Unnamed: 6" : 'A New Hope', 
+        "Unnamed: 7" : 'The Empire Strikes Back',
+        "Unnamed: 8" : 'Return of the Jedi'
+})
+
+movie_names = {
+    "Star Wars: Episode I  The Phantom Menace" : "YES",
+    "Star Wars: Episode II  Attack of the Clones" : "YES",
+    "Star Wars: Episode III  Revenge of the Sith" : "YES",
+    "Star Wars: Episode IV  A New Hope" : "YES",
+    "Star Wars: Episode V The Empire Strikes Back" : "YES",
+    "Star Wars: Episode VI Return of the Jedi" : "YES",
+    np.nan : "NO"
+}
+
+for c in star_wars.columns[3 : 9] :
+    star_wars[c] = star_wars[c].map(movie_names)
+    
+star_wars.head()
+----
+
+
++*Out[112]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |Please
+rank the Star Wars films in order of preference with 1 being your
+favorite film in the franchise and 6 being your least favorite film.
+|... |Unnamed: 28 |Which character shot first? |Are you familiar with
+the Expanded Universe? |Do you consider yourself to be a fan of the
+Expanded Universe?Œæ |Do you consider yourself to be a fan of the Star
+Trek franchise? |Gender |Age |Household Income |Education |Location
+(Census Region)
+|1 |3.292880e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |3 |... |Very
+favorably |I don't understand this question |Yes |No |No |Male |18-29
+|NaN |High school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NO |NO |NO |NO |NO |NO |NaN |... |NaN |NaN
+|NaN |NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West South
+Central
+
+|3 |3.292765e+09 |Yes |No |YES |YES |YES |NO |NO |NO |1 |... |Unfamiliar
+(N/A) |I don't understand this question |No |NaN |No |Male |18-29 |$0 -
+$24,999 |High school degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5 |... |Very
+favorably |I don't understand this question |No |NaN |Yes |Male |18-29
+|$100,000 - $149,999 |Some college or Associate degree |West North
+Central
+
+|5 |3.292731e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5 |...
+|Somewhat favorably |Greedo |Yes |No |No |Male |18-29 |$100,000 -
+$149,999 |Some college or Associate degree |West North Central
+|=======================================================================
+
+5 rows × 38 columns
+----
+
+Now renaming the columns holding the rankings given by the respondents
+for the movies among the entire series
+
+
++*In[113]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[9 : 15]] = star_wars[star_wars.columns[9 : 15]].astype(float)
+
+star_wars = star_wars.rename(columns = {
+        "Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film." : "The Phantom Menance - ranking",
+        "Unnamed: 10" : "Attack of the Clones - ranking",
+        "Unnamed: 11" : "Revenge of the Sith - ranking",
+        "Unnamed: 12" : "A New Hope - ranking",
+        "Unnamed: 13" : "The Empire Strikes Back - ranking",
+        "Unnamed: 14" : "Return of the Jedi - ranking",
+        "Do you consider yourself to be a fan of the Expanded Universe?æ" : "Do you consider yourself to be a fan of the Expanded Universe?"
+})
+star_wars
+----
+
+
++*Out[113]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |The
+Phantom Menance - ranking |... |Unnamed: 28 |Which character shot first?
+|Are you familiar with the Expanded Universe? |Do you consider yourself
+to be a fan of the Expanded Universe? |Do you consider yourself to be a
+fan of the Star Trek franchise? |Gender |Age |Household Income
+|Education |Location (Census Region)
+|1 |3.292880e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |3.0 |... |Very
+favorably |I don't understand this question |Yes |No |No |Male |18-29
+|NaN |High school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NO |NO |NO |NO |NO |NO |NaN |... |NaN |NaN
+|NaN |NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West South
+Central
+
+|3 |3.292765e+09 |Yes |No |YES |YES |YES |NO |NO |NO |1.0 |...
+|Unfamiliar (N/A) |I don't understand this question |No |NaN |No |Male
+|18-29 |$0 - $24,999 |High school degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |... |Very
+favorably |I don't understand this question |No |NaN |Yes |Male |18-29
+|$100,000 - $149,999 |Some college or Associate degree |West North
+Central
+
+|5 |3.292731e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |...
+|Somewhat favorably |Greedo |Yes |No |No |Male |18-29 |$100,000 -
+$149,999 |Some college or Associate degree |West North Central
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |...
+|Very favorably |Han |No |NaN |Yes |Female |18-29 |$0 - $24,999 |Some
+college or Associate degree |East North Central
+
+|1183 |3.288379e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |4.0 |...
+|Very favorably |I don't understand this question |No |NaN |Yes |Female
+|30-44 |$50,000 - $99,999 |Bachelor degree |Mountain
+
+|1184 |3.288375e+09 |No |NaN |NO |NO |NO |NO |NO |NO |NaN |... |NaN |NaN
+|NaN |NaN |No |Female |30-44 |$50,000 - $99,999 |Bachelor degree |Middle
+Atlantic
+
+|1185 |3.288373e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |4.0 |...
+|Very favorably |Han |No |NaN |Yes |Female |45-60 |$100,000 - $149,999
+|Some college or Associate degree |East North Central
+
+|1186 |3.288373e+09 |Yes |No |YES |YES |NO |NO |YES |YES |6.0 |... |Very
+unfavorably |I don't understand this question |No |NaN |No |Female |> 60
+|$50,000 - $99,999 |Graduate degree |Pacific
+|=======================================================================
+
+1186 rows × 38 columns
+----
+
+The columns containing the Star war characters i.e., from column 15 to
+29 are now changed along with the changing of rating of characters into
+integers as shown below for calculating rating of Star war characters.
+
+
++*In[114]:*+
+[source, ipython3]
+----
+star_wars = star_wars.rename(columns = {
+        "Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her." : "Han Solo",
+        "Unnamed: 16" : "Luke Skywalker",
+        "Unnamed: 17" : "Princess Leia Organa",
+        "Unnamed: 18" : "Anakin Skywalker",
+        "Unnamed: 19" : "Obi Wan Kenobi",
+        "Unnamed: 20" : "Emperor Palpatine",
+        "Unnamed: 21" : "Darth Vader",
+        "Unnamed: 22" : "Lando Calrissian",
+        "Unnamed: 23" : "Boba Fett",
+        "Unnamed: 24" : "C-3P0",
+        "Unnamed: 25" : "R2 D2",
+        "Unnamed: 26" : "Jar Jar Binks",
+        "Unnamed: 27" : "Padme Amidala",
+        "Unnamed: 28" : "Yoda",
+})
+
+character_scores = {
+    "Very unfavorably" : -2,
+    "Somewhat unfavorably" : -1,
+    "Neither favorably nor unfavorably (neutral)" : 0,
+    "Somewhat favorably" : 1,
+    "Very favorably" : 2,
+    "Unfamiliar (N/A)" : 0,
+    np.nan : 0
+}
+
+for c in star_wars.columns[15 : 29] :
+    star_wars[c] = star_wars[c].map(character_scores)
+star_wars
+----
+
+
++*Out[114]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |The
+Phantom Menance - ranking |... |Yoda |Which character shot first? |Are
+you familiar with the Expanded Universe? |Do you consider yourself to be
+a fan of the Expanded Universe? |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|1 |3.292880e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |3.0 |... |2 |I
+don't understand this question |Yes |No |No |Male |18-29 |NaN |High
+school degree |South Atlantic
+
+|2 |3.292880e+09 |No |NaN |NO |NO |NO |NO |NO |NO |NaN |... |0 |NaN |NaN
+|NaN |Yes |Male |18-29 |$0 - $24,999 |Bachelor degree |West South
+Central
+
+|3 |3.292765e+09 |Yes |No |YES |YES |YES |NO |NO |NO |1.0 |... |0 |I
+don't understand this question |No |NaN |No |Male |18-29 |$0 - $24,999
+|High school degree |West North Central
+
+|4 |3.292763e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |... |2 |I
+don't understand this question |No |NaN |Yes |Male |18-29 |$100,000 -
+$149,999 |Some college or Associate degree |West North Central
+
+|5 |3.292731e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |... |1
+|Greedo |Yes |No |No |Male |18-29 |$100,000 - $149,999 |Some college or
+Associate degree |West North Central
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |5.0 |... |2
+|Han |No |NaN |Yes |Female |18-29 |$0 - $24,999 |Some college or
+Associate degree |East North Central
+
+|1183 |3.288379e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |4.0 |... |2
+|I don't understand this question |No |NaN |Yes |Female |30-44 |$50,000
+- $99,999 |Bachelor degree |Mountain
+
+|1184 |3.288375e+09 |No |NaN |NO |NO |NO |NO |NO |NO |NaN |... |0 |NaN
+|NaN |NaN |No |Female |30-44 |$50,000 - $99,999 |Bachelor degree |Middle
+Atlantic
+
+|1185 |3.288373e+09 |Yes |Yes |YES |YES |YES |YES |YES |YES |4.0 |... |2
+|Han |No |NaN |Yes |Female |45-60 |$100,000 - $149,999 |Some college or
+Associate degree |East North Central
+
+|1186 |3.288373e+09 |Yes |No |YES |YES |NO |NO |YES |YES |6.0 |... |-2
+|I don't understand this question |No |NaN |No |Female |> 60 |$50,000 -
+$99,999 |Graduate degree |Pacific
+|=======================================================================
+
+1186 rows × 38 columns
+----
+
+*Looking for any unwanted data or checking for any data changes.*
+
+
++*In[115]:*+
+[source, ipython3]
+----
+star_wars["RespondentID"].isna().sum()# Finds any null values in the column.
+----
+
+
++*Out[115]:*+
+----0----
+
+
++*In[116]:*+
+[source, ipython3]
+----
+star_wars["Have you seen any of the 6 films in the Star Wars franchise?"].unique()
+----
+
+
++*Out[116]:*+
+----array(['Yes', 'No', 'Yes '], dtype=object)----
+
+
++*In[117]:*+
+[source, ipython3]
+----
+star_wars["Have you seen any of the 6 films in the Star Wars franchise?"].replace("Yes ", "Yes", inplace = True)
+star_wars["Have you seen any of the 6 films in the Star Wars franchise?"].unique()
+----
+
+
++*Out[117]:*+
+----array(['Yes', 'No'], dtype=object)----
+
+
++*In[118]:*+
+[source, ipython3]
+----
+# Do you consider yourself to be a fan of the Star Wars film franchise?
+star_wars[star_wars.columns[2]].unique()
+----
+
+
++*Out[118]:*+
+----array(['Yes', nan, 'No', 'Yess', 'Noo'], dtype=object)----
+
+
++*In[119]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[2]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[2]].replace("Yess", "Yes", inplace = True)
+star_wars[star_wars.columns[2]].replace("Noo", "No", inplace = True)
+star_wars[star_wars.columns[2]].unique()
+----
+
+
++*Out[119]:*+
+----array(['Yes', 'Not Answered', 'No'], dtype=object)----
+
+Columns holding the data for seen not seen values for each episode.
+
+
++*In[120]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[9]].unique()
+----
+
+
++*Out[120]:*+
+----array([ 3., nan,  1.,  5.,  6.,  4.,  2.])----
+
+
++*In[121]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[9]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[9]].unique()
+----
+
+
++*Out[121]:*+
+----array([3., 0., 1., 5., 6., 4., 2.])----
+
+
++*In[122]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[10]].unique()
+----
+
+
++*Out[122]:*+
+----array([ 2., nan,  6.,  4.,  5.,  1.,  3.])----
+
+
++*In[123]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[10]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[10]].unique()
+----
+
+
++*Out[123]:*+
+----array([2., 0., 6., 4., 5., 1., 3.])----
+
+
++*In[124]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[11]].unique()
+----
+
+
++*Out[124]:*+
+----array([ 1., nan,  3.,  6.,  4.,  5.,  2.])----
+
+
++*In[125]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[11]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[11]].unique()
+----
+
+
++*Out[125]:*+
+----array([1., 0., 3., 6., 4., 5., 2.])----
+
+
++*In[126]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[12]].unique()
+----
+
+
++*Out[126]:*+
+----array([ 4., nan,  2.,  6.,  3.,  1.,  5.])----
+
+
++*In[127]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[12]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[12]].unique()
+----
+
+
++*Out[127]:*+
+----array([4., 0., 2., 6., 3., 1., 5.])----
+
+
++*In[128]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[13]].unique()
+----
+
+
++*Out[128]:*+
+----array([ 5., nan,  4.,  1.,  2.,  3.,  6.])----
+
+
++*In[129]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[13]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[13]].unique()
+----
+
+
++*Out[129]:*+
+----array([5., 0., 4., 1., 2., 3., 6.])----
+
+
++*In[130]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[14]].unique()
+----
+
+
++*Out[130]:*+
+----array([ 6., nan,  3.,  2.,  1.,  4.,  5.])----
+
+
++*In[131]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[14]].replace(np.nan, 0, inplace = True)
+star_wars[star_wars.columns[14]].unique()
+----
+
+
++*Out[131]:*+
+----array([6., 0., 3., 2., 1., 4., 5.])----
+
+
++*In[132]:*+
+[source, ipython3]
+----
+star_wars["Which character shot first?"].unique()
+----
+
+
++*Out[132]:*+
+----array(["I don't understand this question", nan, 'Greedo', 'Han'],
+      dtype=object)----
+
+
++*In[133]:*+
+[source, ipython3]
+----
+star_wars["Which character shot first?"].replace(np.nan, "Not Answered", inplace = True)
+star_wars["Which character shot first?"].replace("Han", "Han Solo", inplace = True)
+star_wars["Which character shot first?"].unique()
+----
+
+
++*Out[133]:*+
+----array(["I don't understand this question", 'Not Answered', 'Greedo',
+       'Han Solo'], dtype=object)----
+
+
++*In[134]:*+
+[source, ipython3]
+----
+# Are you familiar with the Expanded Universe? 
+star_wars[star_wars.columns[30]].unique()
+----
+
+
++*Out[134]:*+
+----array(['Yes', nan, 'No'], dtype=object)----
+
+
++*In[135]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[30]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[30]].unique()
+----
+
+
++*Out[135]:*+
+----array(['Yes', 'Not Answered', 'No'], dtype=object)----
+
+
++*In[136]:*+
+[source, ipython3]
+----
+# Do you consider yourself to be a fan of the Expanded Universe?
+star_wars[star_wars.columns[31]].unique()
+----
+
+
++*Out[136]:*+
+----array(['No', nan, 'Yes', 'Yess'], dtype=object)----
+
+
++*In[137]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[31]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[31]].replace("Yess", "Yes", inplace = True)
+star_wars[star_wars.columns[31]].unique()
+----
+
+
++*Out[137]:*+
+----array(['No', 'Not Answered', 'Yes'], dtype=object)----
+
+
++*In[138]:*+
+[source, ipython3]
+----
+# Do you consider yourself to be a fan of the Star Trek franchise? 
+star_wars[star_wars.columns[32]].unique()
+----
+
+
++*Out[138]:*+
+----array(['No', 'Yes', nan, 'Noo', 'yes', 'no '], dtype=object)----
+
+
++*In[139]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[32]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[32]].replace("Noo", "No", inplace = True)
+star_wars[star_wars.columns[32]].replace("no ", "No", inplace = True)
+star_wars[star_wars.columns[32]].unique()
+----
+
+
++*Out[139]:*+
+----array(['No', 'Yes', 'Not Answered', 'yes'], dtype=object)----
+
+When we convert to upper case the remaining typos will get changed.
+
+
++*In[140]:*+
+[source, ipython3]
+----
+# Gender.
+star_wars[star_wars.columns[33]].unique()
+----
+
+
++*Out[140]:*+
+----array(['Male', nan, 'Female', 'F', 'female', 'male'], dtype=object)----
+
+
++*In[141]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[33]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[33]].replace("F", "Female", inplace = True)
+star_wars[star_wars.columns[33]].unique()
+----
+
+
++*Out[141]:*+
+----array(['Male', 'Not Answered', 'Female', 'female', 'male'], dtype=object)----
+
+
++*In[142]:*+
+[source, ipython3]
+----
+# Age.
+star_wars[star_wars.columns[34]].unique()
+----
+
+
++*Out[142]:*+
+----array(['18-29', nan, '500', '30-44', '> 60', '45-60'], dtype=object)----
+
+
++*In[143]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[34]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[34]].replace("500", "< 18", inplace = True)
+star_wars[star_wars.columns[34]].unique()
+----
+
+
++*Out[143]:*+
+----array(['18-29', 'Not Answered', '< 18', '30-44', '> 60', '45-60'],
+      dtype=object)----
+
+
++*In[144]:*+
+[source, ipython3]
+----
+# Household Income.
+star_wars[star_wars.columns[35]].unique()
+----
+
+
++*Out[144]:*+
+----array([nan, '$0 - $24,999', '$100,000 - $149,999', '$25,000 - $49,999',
+       '$50,000 - $99,999', '$150,000+'], dtype=object)----
+
+
++*In[145]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[35]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[35]].unique()
+----
+
+
++*Out[145]:*+
+----array(['Not Answered', '$0 - $24,999', '$100,000 - $149,999',
+       '$25,000 - $49,999', '$50,000 - $99,999', '$150,000+'],
+      dtype=object)----
+
+
++*In[146]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[36]].unique()
+----
+
+
++*Out[146]:*+
+----array(['High school degree', 'Bachelor degree',
+       'Some college or Associate degree', nan, 'Graduate degree',
+       'Less than high school degree'], dtype=object)----
+
+
++*In[147]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[36]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[36]].unique()
+----
+
+
++*Out[147]:*+
+----array(['High school degree', 'Bachelor degree',
+       'Some college or Associate degree', 'Not Answered',
+       'Graduate degree', 'Less than high school degree'], dtype=object)----
+
+
++*In[148]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[37]].unique()
+----
+
+
++*Out[148]:*+
+----array(['South Atlantic', 'West South Central', 'West North Central',
+       'Middle Atlantic', 'East North Central', 'Pacific', nan,
+       'Mountain', 'New England', 'East South Central'], dtype=object)----
+
+
++*In[149]:*+
+[source, ipython3]
+----
+star_wars[star_wars.columns[37]].replace(np.nan, "Not Answered", inplace = True)
+star_wars[star_wars.columns[37]].unique()
+----
+
+
++*Out[149]:*+
+----array(['South Atlantic', 'West South Central', 'West North Central',
+       'Middle Atlantic', 'East North Central', 'Pacific', 'Not Answered',
+       'Mountain', 'New England', 'East South Central'], dtype=object)----
+
+
++*In[150]:*+
+[source, ipython3]
+----
+#Again checking null values
+star_wars.isnull().sum()
+----
+
+
++*Out[150]:*+
+----RespondentID                                                             0
+Have you seen any of the 6 films in the Star Wars franchise?             0
+Do you consider yourself to be a fan of the Star Wars film franchise?    0
+The Phantom Menance                                                      0
+Attack of the Clones                                                     0
+Revenge of the Sith                                                      0
+A New Hope                                                               0
+The Empire Strikes Back                                                  0
+Return of the Jedi                                                       0
+The Phantom Menance - ranking                                            0
+Attack of the Clones - ranking                                           0
+Revenge of the Sith - ranking                                            0
+A New Hope - ranking                                                     0
+The Empire Strikes Back - ranking                                        0
+Return of the Jedi - ranking                                             0
+Han Solo                                                                 0
+Luke Skywalker                                                           0
+Princess Leia Organa                                                     0
+Anakin Skywalker                                                         0
+Obi Wan Kenobi                                                           0
+Emperor Palpatine                                                        0
+Darth Vader                                                              0
+Lando Calrissian                                                         0
+Boba Fett                                                                0
+C-3P0                                                                    0
+R2 D2                                                                    0
+Jar Jar Binks                                                            0
+Padme Amidala                                                            0
+Yoda                                                                     0
+Which character shot first?                                              0
+Are you familiar with the Expanded Universe?                             0
+Do you consider yourself to be a fan of the Expanded Universe?           0
+Do you consider yourself to be a fan of the Star Trek franchise?         0
+Gender                                                                   0
+Age                                                                      0
+Household Income                                                         0
+Education                                                                0
+Location (Census Region)                                                 0
+dtype: int64----
+
+There fore the data is perfect.
+
+[[task-1.4]]
+== Task 1.4
+
+Checking for white spaces.
+
+
++*In[151]:*+
+[source, ipython3]
+----
+print(star_wars[star_wars.columns[2]].str.isspace().sum())# Have you seen any of the 6 films in the Star Wars franchise?
+print(star_wars[star_wars.columns[3]].str.isspace().sum())# Do you consider yourself to be a fan of the Star Wars film franchise?
+print(star_wars[star_wars.columns[4]].str.isspace().sum())# The Phantom Menance
+print(star_wars[star_wars.columns[5]].str.isspace().sum())# Attack of the Clones
+print(star_wars[star_wars.columns[6]].str.isspace().sum())# Revenge of the Sith 
+print(star_wars[star_wars.columns[7]].str.isspace().sum())# A New Hope
+print(star_wars[star_wars.columns[8]].str.isspace().sum())# The Empire Strikes Back
+print(star_wars[star_wars.columns[29]].str.isspace().sum())# Return of the Jedi
+print(star_wars[star_wars.columns[30]].str.isspace().sum())# Which character shot first?
+print(star_wars[star_wars.columns[31]].str.isspace().sum())# Are you familiar with the Expanded Universe?
+print(star_wars[star_wars.columns[32]].str.isspace().sum())# Do you consider yourself to be a fan of the Expanded Universe?
+print(star_wars[star_wars.columns[33]].str.isspace().sum())# Do you consider yourself to be a fan of the Star Trek franchise?
+print(star_wars[star_wars.columns[34]].str.isspace().sum())# Gender
+print(star_wars[star_wars.columns[35]].str.isspace().sum())# Age
+print(star_wars[star_wars.columns[36]].str.isspace().sum())# Education
+print(star_wars[star_wars.columns[37]].str.isspace().sum())# Location (Census Region)
+----
+
+
++*Out[151]:*+
+----
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+----
+
+Therefore, there are no white spaces on the string variable.
+
+[[task-1.5]]
+== Task 1.5
+
+Upper Case conversion
+
+
++*In[152]:*+
+[source, ipython3]
+----
+star_wars['Have you seen any of the 6 films in the Star Wars franchise?'] = star_wars['Have you seen any of the 6 films in the Star Wars franchise?'].str.upper()
+star_wars['Do you consider yourself to be a fan of the Star Wars film franchise?'] = star_wars['Do you consider yourself to be a fan of the Star Wars film franchise?'].str.upper()
+star_wars[star_wars.columns[3]] = star_wars[star_wars.columns[3]].str.upper()
+star_wars[star_wars.columns[4]] = star_wars[star_wars.columns[4]].str.upper()
+star_wars[star_wars.columns[5]] = star_wars[star_wars.columns[5]].str.upper()
+star_wars[star_wars.columns[6]] = star_wars[star_wars.columns[6]].str.upper()
+star_wars[star_wars.columns[7]] = star_wars[star_wars.columns[7]].str.upper()
+star_wars[star_wars.columns[8]] = star_wars[star_wars.columns[8]].str.upper()
+star_wars['Which character shot first?'] = star_wars['Which character shot first?'].str.upper()
+star_wars['Are you familiar with the Expanded Universe?'] = star_wars['Are you familiar with the Expanded Universe?'].str.upper()
+star_wars['Do you consider yourself to be a fan of the Expanded Universe?'] = star_wars['Do you consider yourself to be a fan of the Expanded Universe?'].str.upper()
+star_wars['Do you consider yourself to be a fan of the Star Trek franchise?'] = star_wars['Do you consider yourself to be a fan of the Star Trek franchise?'].str.upper()
+star_wars['Gender'] = star_wars['Gender'].str.upper()
+star_wars['Education'] = star_wars['Education'].str.upper()
+star_wars['Location (Census Region)'] = star_wars['Location (Census Region)'].str.upper()
+star_wars.head()
+----
+
+
++*Out[152]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |The
+Phantom Menance - ranking |... |Yoda |Which character shot first? |Are
+you familiar with the Expanded Universe? |Do you consider yourself to be
+a fan of the Expanded Universe? |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|1 |3.292880e+09 |YES |YES |YES |YES |YES |YES |YES |YES |3.0 |... |2 |I
+DON'T UNDERSTAND THIS QUESTION |YES |NO |NO |MALE |18-29 |Not Answered
+|HIGH SCHOOL DEGREE |SOUTH ATLANTIC
+
+|2 |3.292880e+09 |NO |NOT ANSWERED |NO |NO |NO |NO |NO |NO |0.0 |... |0
+|NOT ANSWERED |NOT ANSWERED |NOT ANSWERED |YES |MALE |18-29 |$0 -
+$24,999 |BACHELOR DEGREE |WEST SOUTH CENTRAL
+
+|3 |3.292765e+09 |YES |NO |YES |YES |YES |NO |NO |NO |1.0 |... |0 |I
+DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |NO |MALE |18-29 |$0 -
+$24,999 |HIGH SCHOOL DEGREE |WEST NORTH CENTRAL
+
+|4 |3.292763e+09 |YES |YES |YES |YES |YES |YES |YES |YES |5.0 |... |2 |I
+DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |YES |MALE |18-29
+|$100,000 - $149,999 |SOME COLLEGE OR ASSOCIATE DEGREE |WEST NORTH
+CENTRAL
+
+|5 |3.292731e+09 |YES |YES |YES |YES |YES |YES |YES |YES |5.0 |... |1
+|GREEDO |YES |NO |NO |MALE |18-29 |$100,000 - $149,999 |SOME COLLEGE OR
+ASSOCIATE DEGREE |WEST NORTH CENTRAL
+|=======================================================================
+
+5 rows × 38 columns
+----
+
+Remaining data is numeric so I changed only these columns.
+
+Now preparing the data for my analysis in task 2. I am changing "YES,
+NO" to "True, False" i.e., into boolean values for easier
+interpretation.
+
+
++*In[154]:*+
+[source, ipython3]
+----
+#Convert Yes, No into Boolean values for easy analysis.
+yes_no = {
+    "YES" : True,
+    "NO" : False,
+    "NOT ANSWERED" : "NOT ANSWERED"
+}
+for c in star_wars.columns[1 : 3] :
+    star_wars[c] = star_wars[c].map(yes_no)
+star_wars[star_wars.columns[2]] = star_wars[star_wars.columns[2]]
+star_wars.head()
+
+----
+
+
++*Out[154]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |The
+Phantom Menance - ranking |... |Yoda |Which character shot first? |Are
+you familiar with the Expanded Universe? |Do you consider yourself to be
+a fan of the Expanded Universe? |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|1 |3.292880e+09 |True |True |YES |YES |YES |YES |YES |YES |3.0 |... |2
+|I DON'T UNDERSTAND THIS QUESTION |YES |NO |NO |MALE |18-29 |Not
+Answered |HIGH SCHOOL DEGREE |SOUTH ATLANTIC
+
+|2 |3.292880e+09 |False |NOT ANSWERED |NO |NO |NO |NO |NO |NO |0.0 |...
+|0 |NOT ANSWERED |NOT ANSWERED |NOT ANSWERED |YES |MALE |18-29 |$0 -
+$24,999 |BACHELOR DEGREE |WEST SOUTH CENTRAL
+
+|3 |3.292765e+09 |True |False |YES |YES |YES |NO |NO |NO |1.0 |... |0 |I
+DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |NO |MALE |18-29 |$0 -
+$24,999 |HIGH SCHOOL DEGREE |WEST NORTH CENTRAL
+
+|4 |3.292763e+09 |True |True |YES |YES |YES |YES |YES |YES |5.0 |... |2
+|I DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |YES |MALE |18-29
+|$100,000 - $149,999 |SOME COLLEGE OR ASSOCIATE DEGREE |WEST NORTH
+CENTRAL
+
+|5 |3.292731e+09 |True |True |YES |YES |YES |YES |YES |YES |5.0 |... |1
+|GREEDO |YES |NO |NO |MALE |18-29 |$100,000 - $149,999 |SOME COLLEGE OR
+ASSOCIATE DEGREE |WEST NORTH CENTRAL
+|=======================================================================
+
+5 rows × 38 columns
+----
+
+Then making the Star war episode seen not seen (Yes, No)values as True
+which implies seen and False if not seen. There by making these values
+as boolean.
+
+
++*In[157]:*+
+[source, ipython3]
+----
+movie_names = {
+    "YES" : True,
+    "NO" : False,
+     np.nan : False # Assuming Boolean variable for better results
+}
+
+for c in star_wars.columns[3 : 9] :
+    star_wars[c] = star_wars[c].map(movie_names)
+
+star_wars
+----
+
+
++*Out[157]:*+
+----
+[cols=",,,,,,,,,,,,,,,,,,,,,",options="header",]
+|=======================================================================
+| |RespondentID |Have you seen any of the 6 films in the Star Wars
+franchise? |Do you consider yourself to be a fan of the Star Wars film
+franchise? |The Phantom Menance |Attack of the Clones |Revenge of the
+Sith |A New Hope |The Empire Strikes Back |Return of the Jedi |The
+Phantom Menance - ranking |... |Yoda |Which character shot first? |Are
+you familiar with the Expanded Universe? |Do you consider yourself to be
+a fan of the Expanded Universe? |Do you consider yourself to be a fan of
+the Star Trek franchise? |Gender |Age |Household Income |Education
+|Location (Census Region)
+|1 |3.292880e+09 |True |True |True |True |True |True |True |True |3.0
+|... |2 |I DON'T UNDERSTAND THIS QUESTION |YES |NO |NO |MALE |18-29 |Not
+Answered |HIGH SCHOOL DEGREE |SOUTH ATLANTIC
+
+|2 |3.292880e+09 |False |NOT ANSWERED |False |False |False |False |False
+|False |0.0 |... |0 |NOT ANSWERED |NOT ANSWERED |NOT ANSWERED |YES |MALE
+|18-29 |$0 - $24,999 |BACHELOR DEGREE |WEST SOUTH CENTRAL
+
+|3 |3.292765e+09 |True |False |True |True |True |False |False |False
+|1.0 |... |0 |I DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |NO
+|MALE |18-29 |$0 - $24,999 |HIGH SCHOOL DEGREE |WEST NORTH CENTRAL
+
+|4 |3.292763e+09 |True |True |True |True |True |True |True |True |5.0
+|... |2 |I DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |YES |MALE
+|18-29 |$100,000 - $149,999 |SOME COLLEGE OR ASSOCIATE DEGREE |WEST
+NORTH CENTRAL
+
+|5 |3.292731e+09 |True |True |True |True |True |True |True |True |5.0
+|... |1 |GREEDO |YES |NO |NO |MALE |18-29 |$100,000 - $149,999 |SOME
+COLLEGE OR ASSOCIATE DEGREE |WEST NORTH CENTRAL
+
+|... |... |... |... |... |... |... |... |... |... |... |... |... |...
+|... |... |... |... |... |... |... |...
+
+|1182 |3.288389e+09 |True |True |True |True |True |True |True |True |5.0
+|... |2 |HAN SOLO |NO |NOT ANSWERED |YES |FEMALE |18-29 |$0 - $24,999
+|SOME COLLEGE OR ASSOCIATE DEGREE |EAST NORTH CENTRAL
+
+|1183 |3.288379e+09 |True |True |True |True |True |True |True |True |4.0
+|... |2 |I DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |YES |FEMALE
+|30-44 |$50,000 - $99,999 |BACHELOR DEGREE |MOUNTAIN
+
+|1184 |3.288375e+09 |False |NOT ANSWERED |False |False |False |False
+|False |False |0.0 |... |0 |NOT ANSWERED |NOT ANSWERED |NOT ANSWERED |NO
+|FEMALE |30-44 |$50,000 - $99,999 |BACHELOR DEGREE |MIDDLE ATLANTIC
+
+|1185 |3.288373e+09 |True |True |True |True |True |True |True |True |4.0
+|... |2 |HAN SOLO |NO |NOT ANSWERED |YES |FEMALE |45-60 |$100,000 -
+$149,999 |SOME COLLEGE OR ASSOCIATE DEGREE |EAST NORTH CENTRAL
+
+|1186 |3.288373e+09 |True |False |True |True |False |False |True |True
+|6.0 |... |-2 |I DON'T UNDERSTAND THIS QUESTION |NO |NOT ANSWERED |NO
+|FEMALE |> 60 |$50,000 - $99,999 |GRADUATE DEGREE |PACIFIC
+|=======================================================================
+
+1186 rows × 38 columns
+----
+
+Changing the rating of characters into integers as shown below for
+calculating popularity of Star war characters.
+
+
++*In[158]:*+
+[source, ipython3]
+----
+star_wars.dtypes
+----
+
+
++*Out[158]:*+
+----RespondentID                                                             float64
+Have you seen any of the 6 films in the Star Wars franchise?              object
+Do you consider yourself to be a fan of the Star Wars film franchise?     object
+The Phantom Menance                                                         bool
+Attack of the Clones                                                        bool
+Revenge of the Sith                                                         bool
+A New Hope                                                                  bool
+The Empire Strikes Back                                                     bool
+Return of the Jedi                                                          bool
+The Phantom Menance - ranking                                            float64
+Attack of the Clones - ranking                                           float64
+Revenge of the Sith - ranking                                            float64
+A New Hope - ranking                                                     float64
+The Empire Strikes Back - ranking                                        float64
+Return of the Jedi - ranking                                             float64
+Han Solo                                                                   int64
+Luke Skywalker                                                             int64
+Princess Leia Organa                                                       int64
+Anakin Skywalker                                                           int64
+Obi Wan Kenobi                                                             int64
+Emperor Palpatine                                                          int64
+Darth Vader                                                                int64
+Lando Calrissian                                                           int64
+Boba Fett                                                                  int64
+C-3P0                                                                      int64
+R2 D2                                                                      int64
+Jar Jar Binks                                                              int64
+Padme Amidala                                                              int64
+Yoda                                                                       int64
+Which character shot first?                                               object
+Are you familiar with the Expanded Universe?                              object
+Do you consider yourself to be a fan of the Expanded Universe?            object
+Do you consider yourself to be a fan of the Star Trek franchise?          object
+Gender                                                                    object
+Age                                                                       object
+Household Income                                                          object
+Education                                                                 object
+Location (Census Region)                                                  object
+dtype: object----
+
+The data is good and data types are fine. Thus cleaning came to an end.
+Now let us explore the data and continue the analysis.
+
+[[task-2]]
+= Task 2
+
+[[task-2.1]]
+== Task 2.1
+
+[[exploring-the-cleaned-data---data-exploration-1]]
+=== Exploring the cleaned data - Data Exploration 1
+
+Now let us analyse how people rated the star war series. To do this 1st
+we have to plot a graph with ratings (integer rankings as float ratings)
+of star war movies. Here *the rankings are subtracted with 6 in order to
+make the highest like movie or episode have the highest rating out of
+6.0*
+
+
++*In[159]:*+
+[source, ipython3]
+----
+m_ranks = 6 - star_wars[star_wars.columns[9 : 15]].mean()
+
+
+x_index = np.arange(len(m_ranks))  # x-axis indexes
+width = 0.5  # width of the bars
+
+fig, ax = plt.subplots(figsize = (16, 13))
+bars = ax.bar(x_index, m_ranks, width)
+
+
+ax.set_xticklabels(
+    ax.set_xticklabels(['',
+    'The Phantom Menance', 
+    'Attack of the Clones', 
+    'Revenge of the Sith', 
+    'A New Hope', 
+    'The Empire Strikes Back', 
+    'Return of the Jedi'] ),
+    rotation = 75, 
+    horizontalalignment = 'right',
+    fontweight = 'light',
+    fontsize = 'x-large'
+
+)
+
+def autolabel(rects, xpos ='center'):
+    
+    """
+    To display values on the bars attach a text label above each bar.
+    *xpos* : the side to which the labeled text is placed wrt the center of the bar. {'center', 'right', 'left'}.
+    """
+    xpos = xpos.lower()  # lower case conversion of parameter
+    ha = {'center': 'center'}
+    offset = {'center': 0.5}
+
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
+                '{:.2}'.format(height), ha = ha[xpos], va ='bottom')
+        
+autolabel(bars)
+plt.rcParams.update({'font.size': 16})
+----
+
+
++*Out[159]:*+
+----
+![png](output_70_0.png)
+----
+
+The ratings of the episodes are as follows :
+
+*Episode 1 : 2.3 / 6.0*
+
+*Episode 2 : 1.9 / 6.0*
+
+*Episode 3 : 1.7 / 6.0*
+
+*Episode 4 : 2.7 / 6.0*
+
+*Episode 5 : 3.5 / 6.0*
+
+*Episode 6 : 3.0 / 6.0*
+
+From this we can say that Episode 5 i.e., "The Empire Strikes Back is
+the highest rated movie with 3.5 rating which means this episode is
+liked by the most of the people who have responded. Followed by "Return
+of Jedi - Episode 6" with rating 3.0. Comming to the least liked movie
+which is "Episode 3 Revenge of the Sith" with 1.7 rating. We cannot
+conclude these as the original ratings from this as the this survey is
+taken from a random sample of people. There might be chances that the
+sample might be Episode 5 favourable sample and more over this may or
+may not be the most liked episode if the sample changes. But for this
+Sample survey this is the report.
+
+Now let us check with the number of recipients voted are already seen
+those movies. That means most watched movie. Out of 1186 recipients
+there are 963 recipients who watched atleast 1 movie and among them how
+many people watched each episode.
+
+
++*In[160]:*+
+[source, ipython3]
+----
+sums = star_wars[star_wars.columns[3:9]].sum()
+
+
+ind = np.arange(len(sums))  
+width = 0.5  
+
+fig, ax = plt.subplots(figsize=(16,13))
+rects1 = ax.bar(ind, sums, width)
+
+
+ax.set_xticklabels(
+    ax.set_xticklabels(['',
+    'The Phantom Menance', 
+    'Attack of the Clones', 
+    'Revenge of the Sith', 
+    'A New Hope', 
+    'The Empire Strikes Back', 
+    'Return of the Jedi'] ),
+    rotation=75, 
+    horizontalalignment='right',
+    fontweight='light',
+    fontsize='x-large'
+
+)
+
+def autolabel(rects, xpos='center'):
+    xpos = xpos.lower() 
+    ha = {'center': 'center', 'right': 'left', 'left': 'right'}
+    offset = {'center': 0.5, 'right': 0.57, 'left': 0.43}  # x_txt = x + w*off
+
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
+                '{:}'.format(height), ha=ha[xpos], va='bottom')
+        
+autolabel(rects1)
+plt.rcParams.update({'font.size': 16})
+----
+
+
++*Out[160]:*+
+----
+![png](output_72_0.png)
+----
+
+Number of people who watched each episodes are as follows :
+
+*Episode 1 : 673 / 963*
+
+*Episode 2 : 571 / 963*
+
+*Episode 3 : 550 / 963*
+
+*Episode 4 : 607 / 963*
+
+*Episode 5 : 758 / 963*
+
+*Episode 6 : 738 / 963*
+
+From this we can say that Episode 5 i.e., "The Empire Strikes Back is
+the highest watched movie with, followed by "Return of Jedi - Episode
+6". Comming to the least watched movie which is "Episode 3 Revenge of
+the Sith" with only 550 viewers.
+
+It is more likely to predict that the movie with highest number of
+viewers is more liked because they saw it. There may be a chance of
+liking Revenge of Sith too if this is seen by the majority.
+
+This can also be implied as the most popular episodes were watched by
+most of the respondents. From this we can say that if the movie is less
+atractive or good the number of people watched the movie is less.
+
+"Seen by people" is directly proportional to "How good the movie is."
+
+Now lets check the viewers count based on their gender. I just wanted to
+know whether there was a significant difference in movie rankings based
+on gender.
+
+
++*In[161]:*+
+[source, ipython3]
+----
+M_F = 6 - star_wars[star_wars.columns[9:15]].copy()
+M_F["Gender"] = star_wars["Gender"]
+grouped = M_F.groupby(["Gender"]).mean()
+print(grouped.transpose())
+grouped.transpose().plot.bar(legend=False, figsize = (15, 9))
+plt.legend(loc = 2, frameon = True)
+----
+
+
++*Out[161]:*+
+----
+Gender                               FEMALE      MALE  NOT ANSWERED
+The Phantom Menance - ranking      3.526412  2.563380      5.635714
+Attack of the Clones - ranking     3.140255  2.404427      5.571429
+Revenge of the Sith - ranking      2.805100  2.370221      5.521429
+A New Hope - ranking               3.437158  3.448692      5.564286
+The Empire Strikes Back - ranking  4.142077  3.907445      5.707143
+Return of the Jedi - ranking       3.774135  3.444668      5.600000
+<matplotlib.legend.Legend at 0x1c80fd6f5c0>
+![png](output_74_2.png)
+----
+
+
++*In[162]:*+
+[source, ipython3]
+----
+M_F = star_wars[star_wars.columns[3:9]].copy()
+M_F["Gender"] = star_wars["Gender"]
+grouped = M_F.groupby(["Gender"]).sum()
+print(grouped.transpose())
+grouped.transpose().plot.bar(legend=False, figsize = (15, 9))
+plt.legend(loc = 2, frameon = True)
+----
+
+
++*Out[162]:*+
+----
+Gender                   FEMALE   MALE  NOT ANSWERED
+The Phantom Menance       298.0  361.0          14.0
+Attack of the Clones      237.0  323.0          11.0
+Revenge of the Sith       222.0  317.0          11.0
+A New Hope                255.0  342.0          10.0
+The Empire Strikes Back   353.0  392.0          13.0
+Return of the Jedi        338.0  387.0          13.0
+<matplotlib.legend.Legend at 0x1c80f80e780>
+![png](output_75_2.png)
+----
+
+It is clear that viewers are mostly males for the last 3 movies and for
+the 1st 2 females are the most viewed. Both Males and Females decreased
+thier intrest towards the series and majority stopped viewing the
+movies, this might be one of the reason for the less viewed count and
+the least rating of episode 3 compared to other movies. Both Episodes 3
+and 5 are on the same general agreement according to male and female
+where they both proportionately watched them. Coming to Not Answered
+Category, they rated favourable to all episodes. This might be a chance
+of having their disinterest towards the survey. Which makes me to find
+alternatives in analysing the data.
+
+Now let us see these rankings based on *Fan Non-Fan* category.
+
+
++*In[166]:*+
+[source, ipython3]
+----
+M_F_2 = star_wars[star_wars.columns[3:9]].copy()
+M_F_2["Do you consider yourself to be a fan of the Star Wars film franchise?"] = star_wars["Do you consider yourself to be a fan of the Star Wars film franchise?"]
+grouped = M_F_2.groupby(["Do you consider yourself to be a fan of the Star Wars film franchise?"]).sum()
+print(grouped.transpose())
+grouped.transpose().plot.bar(legend=False, figsize = (15, 8))
+plt.legend(loc = 2, frameon = True)
+M_F_2 = 6 - star_wars[star_wars.columns[9:15]].copy()
+----
+
+
++*Out[166]:*+
+----
+Do you consider yourself to be a fan of the Star Wars film franchise?  False  \
+The Phantom Menance                                                    173.0   
+Attack of the Clones                                                   108.0   
+Revenge of the Sith                                                    100.0   
+A New Hope                                                             124.0   
+The Empire Strikes Back                                                220.0   
+Return of the Jedi                                                     201.0   
+
+Do you consider yourself to be a fan of the Star Wars film franchise?   True  \
+The Phantom Menance                                                    500.0   
+Attack of the Clones                                                   463.0   
+Revenge of the Sith                                                    450.0   
+A New Hope                                                             483.0   
+The Empire Strikes Back                                                538.0   
+Return of the Jedi                                                     537.0   
+
+Do you consider yourself to be a fan of the Star Wars film franchise?  NOT ANSWERED  
+The Phantom Menance                                                             0.0  
+Attack of the Clones                                                            0.0  
+Revenge of the Sith                                                             0.0  
+A New Hope                                                                      0.0  
+The Empire Strikes Back                                                         0.0  
+Return of the Jedi                                                              0.0  
+
+![png](output_77_1.png)
+----
+
+Fans are more likely that they watched the original movies more, also
+most of them have seen all 6. Coming to non-fans, they mostly prefered
+original movies than prequels.
+
+Now let us consider ratings with this classification.
+
+
++*In[167]:*+
+[source, ipython3]
+----
+M_F_2 = 6 - star_wars[star_wars.columns[9:15]].copy()
+M_F_2["Do you consider yourself to be a fan of the Star Wars film franchise?"] = star_wars["Do you consider yourself to be a fan of the Star Wars film franchise?"]
+grouped = M_F_2.groupby(["Do you consider yourself to be a fan of the Star Wars film franchise?"]).mean()
+print(grouped.transpose())
+grouped.transpose().plot.bar(legend=False, figsize = (15, 8))
+plt.legend(loc = 2, frameon = True)
+----
+
+
++*Out[167]:*+
+----
+Do you consider yourself to be a fan of the Star Wars film franchise?     False  \
+The Phantom Menance - ranking                                          3.073944   
+Attack of the Clones - ranking                                         2.408451   
+Revenge of the Sith - ranking                                          1.806338   
+A New Hope - ranking                                                   2.066901   
+The Empire Strikes Back - ranking                                      3.137324   
+Return of the Jedi - ranking                                           2.528169   
+
+Do you consider yourself to be a fan of the Star Wars film franchise?      True  \
+The Phantom Menance - ranking                                          1.858696   
+Attack of the Clones - ranking                                         1.657609   
+Revenge of the Sith - ranking                                          1.590580   
+A New Hope - ranking                                                   3.067029   
+The Empire Strikes Back - ranking                                      3.666667   
+Return of the Jedi - ranking                                           3.170290   
+
+Do you consider yourself to be a fan of the Star Wars film franchise?  NOT ANSWERED  
+The Phantom Menance - ranking                                                   6.0  
+Attack of the Clones - ranking                                                  6.0  
+Revenge of the Sith - ranking                                                   6.0  
+A New Hope - ranking                                                            6.0  
+The Empire Strikes Back - ranking                                               6.0  
+Return of the Jedi - ranking                                                    6.0  
+<matplotlib.legend.Legend at 0x1c80ed5b9b0>
+![png](output_79_2.png)
+----
+
+Fans : Again they showed their love towards original series by rating
+the originals high,
+
+Non - Fans : They given ratings for episodes 1 and 5 mostly similar and
+leaving this point to consider for analysis. They might have given some
+proper ratings as they are not favourable to any of the episodes leaving
+their opinions genuine(Just an assumption).
+
+Not Answered : Similar to Gender (Coming to Not Answered Category, they
+rated favourable to all episodes. This might be a chance of having their
+disinterest towards the survey.)
+
+Now let us check number of people seen each movie and sample people who
+saw all movies for better analysis
+
+
++*In[168]:*+
+[source, ipython3]
+----
+star_wars['movies_seen'] = star_wars.loc[ :, "The Phantom Menance" : "Return of the Jedi"].sum(axis = 1)
+star_wars['movies_seen'].value_counts()
+seen_all = star_wars[star_wars['movies_seen'] == 6]
+sums = 6 - seen_all.loc[:, "The Phantom Menance - ranking" : "Return of the Jedi - ranking"].mean()
+
+
+ind = np.arange(len(sums))  
+width = 0.5  
+
+fig, ax = plt.subplots(figsize=(16,13))
+rects1 = ax.bar(ind, sums, width)
+
+
+ax.set_xticklabels(
+    ax.set_xticklabels(['',
+    'The Phantom Menance', 
+    'Attack of the Clones', 
+    'Revenge of the Sith', 
+    'A New Hope', 
+    'The Empire Strikes Back', 
+    'Return of the Jedi'] ),
+    rotation=75, 
+    horizontalalignment='right',
+    fontweight='light',
+    fontsize='x-large'
+
+)
+
+def autolabel(rects, xpos='center'):
+    xpos = xpos.lower() 
+    ha = {'center': 'center', 'right': 'left', 'left': 'right'}
+    offset = {'center': 0.5, 'right': 0.57, 'left': 0.43}
+
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
+                '{:.3}'.format(height), ha=ha[xpos], va='bottom')
+        
+autolabel(rects1)
+plt.rcParams.update({'font.size': 16})
+----
+
+
++*Out[168]:*+
+----
+![png](output_81_0.png)
+----
+
+From the above analysis we can also predict how people generally rate
+the movies. Here, the respondents splitted into two groups namely,
+
+*1. Original followers -- Episodes 4, 5, 6*
+
+*2. Prequel followers -- Episodes 1, 2, 3*
+
+Respondents who voted for *The Empire Strikes Back : Episode - 5* as
+their favorite are more likely to rate *A New Hope : Episode - 4* and in
+turn rated *Return of the Jedi : Episode - 6* too. Similarly, people who
+voted for *The Phantom Menace : Episode - 1* as the most liked film were
+more likely to rate *Episodes 2 and 3*. This is just the point of views
+of some random people and might vary if the sample changes.
+
+There is also a chance that respondents are voting the movies blindly
+*even if they didn't watched them*. They may vote based on thier own
+perspectives or even based on the word of mouth from the fellow people.
+This results in the flaw in the analysis that we attained so far.
+
+So the result might be more accurate if we only consider the respondent
+votings who have seen all the 6 movies. As *The Empire Strikes Back :
+Episode - 5* is seen by more people it might get the highest rating as
+the respondents who have seen it might not seen the other episode.
+
+[[task-2.2]]
+== Task 2.2
+
+[[visualisation-based-on-plausible-hypothesis-for-3-pairs-of-columns---data-exploration-2]]
+=== Visualisation based on Plausible hypothesis for 3 pairs of columns -
+Data Exploration 2
+
+*Pair 1 - Visualisation*
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+*Pair 2 - Visualisation*
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+*Pair 3 - Visualisation*
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
+
+[[task-2.3]]
+== Task 2.3
+
+[[demographic-analysis---data-exploration-3]]
+=== Demographic analysis - Data Exploration 3
+
+Now let us check for the relations among people's demographics
+
+
++*In[169]:*+
+[source, ipython3]
+----
+demo = star_wars[star_wars.columns[33:38]].copy()
+v = demo.groupby(["Gender", "Age"]).count()
+print(v)
+print(v.transpose())
+v.transpose().plot.bar(legend=False, figsize = (20, 15))
+plt.legend(loc = 2, frameon = True)
+----
+
+
++*Out[169]:*+
+----
+                           Household Income  Education  \
+Gender       Age                                         
+FEMALE       18-29                      114        114   
+             30-44                      136        136   
+             45-60                      151        151   
+             > 60                       148        148   
+MALE         18-29                      103        103   
+             30-44                      132        132   
+             45-60                      140        140   
+             < 18                         1          1   
+             > 60                       121        121   
+NOT ANSWERED Not Answered               140        140   
+
+                           Location (Census Region)  
+Gender       Age                                     
+FEMALE       18-29                              114  
+             30-44                              136  
+             45-60                              151  
+             > 60                               148  
+MALE         18-29                              103  
+             30-44                              132  
+             45-60                              140  
+             < 18                                 1  
+             > 60                               121  
+NOT ANSWERED Not Answered                       140  
+Gender                   FEMALE                   MALE                        \
+Age                       18-29 30-44 45-60 > 60 18-29 30-44 45-60 < 18 > 60   
+Household Income            114   136   151  148   103   132   140    1  121   
+Education                   114   136   151  148   103   132   140    1  121   
+Location (Census Region)    114   136   151  148   103   132   140    1  121   
+
+Gender                   NOT ANSWERED  
+Age                      Not Answered  
+Household Income                  140  
+Education                         140  
+Location (Census Region)          140  
+<matplotlib.legend.Legend at 0x1c80ef6a5f8>
+![png](output_92_2.png)
+----
+
+Now consider *Relationships between Respondents demographics and their
+Attitude on each Character*
+
+*1. With respect to Gender*
+
+
++*In[170]:*+
+[source, ipython3]
+----
+fig = plt.figure(figsize=(15, 55))
+
+counter = 1
+
+for e in set(star_wars["Gender"]):
+    if pd.isnull(e):
+        continue
+    edu = 2 + star_wars[star_wars["Gender"] == e][star_wars.columns[15:29]]
+    ax = fig.add_subplot(3, 1, counter)
+    sn = sns.barplot(data = edu, ci = None)
+    sn.set_title(e)
+    plt.xticks(rotation = 90)
+    counter+=1
+
+
+plt.show()
+----
+
+
++*Out[170]:*+
+----
+![png](output_94_0.png)
+----
+
+*2. With respect to Age*
+
+
++*In[171]:*+
+[source, ipython3]
+----
+fig = plt.figure(figsize=(15, 120))
+
+counter = 1
+
+for e in set(star_wars["Age"]):
+    if pd.isnull(e):
+        continue
+    edu = 2 + star_wars[star_wars["Age"] == e][star_wars.columns[15:29]]
+    ax = fig.add_subplot(6, 1, counter)
+    sn = sns.barplot(data = edu, ci = None)
+    sn.set_title(e)
+    plt.xticks(rotation = 90)
+    counter+=1
+
+
+plt.show()
+----
+
+
++*Out[171]:*+
+----
+![png](output_96_0.png)
+----
+
+*3. With respect to Education*
+
+
++*In[172]:*+
+[source, ipython3]
+----
+fig = plt.figure(figsize=(15, 120))
+
+counter = 1
+
+for e in set(star_wars["Education"]):
+    if pd.isnull(e):
+        continue
+    edu = 2 + star_wars[star_wars["Education"] == e][star_wars.columns[15:29]]
+    ax = fig.add_subplot(6, 1, counter)
+    sn = sns.barplot(data = edu, ci = None)
+    sn.set_title(e)
+    plt.xticks(rotation = 90)
+    counter+=1
+
+
+plt.show()
+----
+
+
++*Out[172]:*+
+----
+![png](output_98_0.png)
+----
+
+*4. With respect to Location*
+
+
++*In[173]:*+
+[source, ipython3]
+----
+fig = plt.figure(figsize=(20, 300))
+
+counter = 1
+
+for e in set(star_wars["Location (Census Region)"]):
+    if pd.isnull(e):
+        continue
+    edu = 2 + star_wars[star_wars["Location (Census Region)"] == e][star_wars.columns[15:29]]
+    ax = fig.add_subplot(14, 1, counter)
+    sn = sns.barplot(data = edu, ci = None)
+    sn.set_title(e)
+    plt.xticks(rotation = 90)
+    counter+=1
+
+
+plt.show()
+----
+
+
++*Out[173]:*+
+----
+![png](output_100_0.png)
+----
+
+Now let us see how each Sart War characters ware rated by respondents
+based on their popularity ratings that are changed changed during data
+cleaning.
+
+
++*In[174]:*+
+[source, ipython3]
+----
+char_names = star_wars[star_wars.columns[15:29]].sum().sort_values(ascending = False)
+index = np.arange(len(char_names))
+width = 0.8
+
+fig, ax = plt.subplots(figsize=(15,14))
+bars1 = ax.bar(index - width/2.0, char_names, color='Blue')
+
+# Adding labels and title
+ax.set_ylabel('Popularity')
+ax.set_xlabel('Character')
+ax.set_title('Popularity of each Characters')
+ax.set_xticks(index)
+ax.set_xticklabels(char_names.index, rotation = 90)
+plt.rcParams.update({'font.size' : 18})
+def autolabel(rects, xpos = 'center') :
+    xpos = xpos.lower()
+    ha = {'center' : 'center', 'right' : 'left', 'left' : 'right'}
+    offset = {'center' : 0.5, 'right' : 0.57, 'left' : 0.43}
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
+                '{:}'.format(height), ha = ha[xpos], va = 'bottom')
+        
+autolabel(bars1)
+plt.rcParams.update({'font.size' : 16})
+----
+
+
++*Out[174]:*+
+----
+![png](output_102_0.png)
+----
+
+From this we can say that Han Solo is most liked among all and Jar Jar
+Binks is mosted disliked character among all Star War characters with
+negative rating.
+
+This might be enough to show how popular the characters were. Both more
+precisely and more visually let us analyse what is the attitude of
+respondents towards each of these characters.
+
+For this I am taking polarity, to show Respondents *Attitude - Possitive
+/ Negative / Neutral* towards Star Wars characters.
+
+[[overall-audience-attitude-based-on-polarity]]
+=== Overall audience attitude based on polarity
+
+We will create a funtion with polarity and split them using pie chart.
+
+
++*In[175]:*+
+[source, ipython3]
+----
+def polarity(row):
+    if row > 0:
+        return "Positive"
+    elif row == 0:
+        return "Neutral/No Answer"
+    elif row < 0:
+        return "Negative"
+    
+characters = ["Han Solo", "Yoda", "Obi Wan Kenobi", "Luke Skywalker", "R2 D2", "Princess Leia Organa", "C-3P0", "Anakin Skywalker", "Lando Calrissian", "Padme Amidala", "Darth Vader", "Boba Fett", "Emperor Palpatine", "Jar Jar Binks"]
+
+
+for c in characters:
+    star_wars[c + " polarity"]= star_wars[c].apply(polarity)
+
+value_count_df = star_wars[star_wars.columns[38:55]].apply(pd.Series.value_counts)
+
+for c in characters:
+    value_count_df[c + " polarity"].plot.pie(figsize=(6, 6), colors=['grey','lightgrey','black'])
+    plt.show()
+
+----
+
+
++*Out[175]:*+
+----
+![png](output_105_0.png)
+
+![png](output_105_1.png)
+
+![png](output_105_2.png)
+
+![png](output_105_3.png)
+
+![png](output_105_4.png)
+
+![png](output_105_5.png)
+
+![png](output_105_6.png)
+
+![png](output_105_7.png)
+
+![png](output_105_8.png)
+
+![png](output_105_9.png)
+
+![png](output_105_10.png)
+
+![png](output_105_11.png)
+
+![png](output_105_12.png)
+
+![png](output_105_13.png)
+----
+
+*Favourable - Possitive*
+
+*Unfavourable - Negative*
+
+From these pie charts we can say that Protogonists(i.e., main characters
+around whom the plot runs) are more liked than the characters with
+negative roles.
